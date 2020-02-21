@@ -43,10 +43,10 @@ public class Hero : Character
 
                 if (enemy.dealDamage)
                 {
-                    TakeDamage(enemy.attackPower);
+                    TakeDamage(enemy.GetComponent<CharacterStats>().GetStatValue(StatType.Damage));
                 }
 
-                if (! enemy.TakeDamage(attackPower))
+                if (! enemy.TakeDamage(GetComponent<CharacterStats>().GetStatValue(StatType.Damage)))
                 {
                     TakeForce(Vector2.left, 1000f);
                     enemy.TakeForce(Vector2.right, 250f);
@@ -62,13 +62,13 @@ public class Hero : Character
     {
         xp += enemy.level;
 
-        if (xp > maxXp)
+        if (xp >= maxXp)
         {
             xp = maxXp - xp;
             LevelUp();
         }
 
-        base.UpdateUI();
+        UpdateUI();
     }
 
     private void LevelUp()

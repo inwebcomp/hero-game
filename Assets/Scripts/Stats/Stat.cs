@@ -5,10 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
+	public StatType type;
 	public float baseValue;   // Starting value
 
 	// Keep a list of all the modifiers on this stat
 	private List<float> modifiers = new List<float>();
+
+	public Stat(StatType type, float baseValue = 0f)
+	{
+		this.type = type;
+		this.baseValue = baseValue;
+	}
 
 	// Add all modifiers together and return the result
 	public float GetValue()
@@ -31,4 +38,12 @@ public class Stat
 		if (modifier != 0)
 			modifiers.Remove(modifier);
 	}
+}
+
+public enum StatType { 
+	None,
+	Health, 
+	Damage, 
+	Armor,
+	Speed,
 }

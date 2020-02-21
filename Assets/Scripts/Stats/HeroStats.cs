@@ -14,14 +14,24 @@ public class HeroStats : CharacterStats
 	{
 		if (newItem != null)
 		{
-			armor.AddModifier(newItem.armorModifier);
-			damage.AddModifier(newItem.damageModifier);
+			foreach(StatModifier statModifier in newItem.modifiers)
+			{
+				if (stats.ContainsKey(statModifier.statType))
+				{
+					stats[statModifier.statType].AddModifier(statModifier.modifier);
+				}
+			}
 		}
 
 		if (oldItem != null)
 		{
-			armor.RemoveModifier(oldItem.armorModifier);
-			damage.RemoveModifier(oldItem.armorModifier);
+			foreach (StatModifier statModifier in oldItem.modifiers)
+			{
+				if (stats.ContainsKey(statModifier.statType))
+				{
+					stats[statModifier.statType].RemoveModifier(statModifier.modifier);
+				}
+			}
 		}
 
 	}

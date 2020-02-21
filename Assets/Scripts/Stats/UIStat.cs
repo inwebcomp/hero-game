@@ -8,9 +8,9 @@ public class UIStat : MonoBehaviour
 {
     public string title;
 
-    public string _value;
+    public float _value;
 
-    public string value
+    public float value
     {
         get { return _value; }
         set
@@ -20,6 +20,10 @@ public class UIStat : MonoBehaviour
         }
     }
 
+    public StatType statType = StatType.None;
+
+    public CharacterStats stats;
+
     private TextMeshProUGUI text;
 
     private void Awake()
@@ -27,8 +31,30 @@ public class UIStat : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        EquipmentManager.instance.onEquipmentChanged += UpdateUIOnEquipmentChanged;
+        UpdateStat();
+    }
+
+    virtual protected void UpdateUIOnEquipmentChanged(Equipment newItem, Equipment oldItem)
+    {
+        UpdateStat();
+    }
+
+    void UpdateStat()
+    {
+        if (statType != StatType.None && stats.statsInitialized)
+        {
+            value = stats.GetStatValue(statType);
+        }
+    }
+
     private void UpdateUI()
     {
+        if (!text)
+            return;
+
         text.text = this.title + ": " + this.value.ToString();
     }
 

@@ -28,12 +28,14 @@ public class Character : MonoBehaviour
 
     [Header("Power")]
     public bool dealDamage = true;
-    public float attackPower = 1f;
 
-    private void Awake()
+    private void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
 
+        EquipmentManager.instance.onEquipmentChanged += UpdateUIOnEquipmentChanged;
+
+        AwakeUpdateStats();
         AwakeUpdateUI();
     }
 
@@ -84,6 +86,22 @@ public class Character : MonoBehaviour
         Destroy(gameObject);
     }
 
+    virtual protected void AwakeUpdateStats()
+    {
+        if (this == null)
+            return;
+
+        CharacterStats stats = GetComponent<CharacterStats>();
+
+        if (stats && stats.statsInitialized)
+        {
+            maxHealth = (int) stats.GetStatValue(StatType.Health);
+            health = maxHealth;
+
+            moveSpeed *= (float) stats.GetStatValue(StatType.Speed);
+        }
+    }
+
     virtual protected void AwakeUpdateUI()
     {
         if (hpBar)
@@ -93,10 +111,17 @@ public class Character : MonoBehaviour
         }
     }
 
+    virtual protected void UpdateUIOnEquipmentChanged(Equipment newItem, Equipment oldItem)
+    {
+        AwakeUpdateStats();
+        UpdateUI();
+    }
+
     virtual protected void UpdateUI()
     {
         if (hpBar)
         {
+            hpBar.maxValue = maxHealth;
             hpBar.value = health;
         }
     }

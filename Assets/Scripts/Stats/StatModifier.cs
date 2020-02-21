@@ -5,5 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class StatModifier
 {
-	public int modifier;
+	public StatType statType;
+	public float modifier;
 }

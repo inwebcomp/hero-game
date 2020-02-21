@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 5760529444813498668}
   - component: {fileID: 5760529444813498675}
   - component: {fileID: 5760529444813498672}
+  - component: {fileID: 2427823562011232477}
   m_Layer: 8
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -431,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9d0e9cfdadfdf4da5b06217ee927bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   isMortal: 1
   takeForce: 1
   health: 10
@@ -441,7 +443,24 @@ MonoBehaviour:
   m_MovementSmoothing: 0.05
   rigidbody2d: {fileID: 0}
   dealDamage: 1
-  attackPower: 1
+--- !u!114 &2427823562011232477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5760529444813498669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d24edad953ca74b9f54c3d8fc3d18d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultStats:
+  - type: 1
+    baseValue: 10
+  - type: 2
+    baseValue: 1
+  statsInitialized: 0
 --- !u!1 &5760529444842888174
 GameObject:
   m_ObjectHideFlags: 0

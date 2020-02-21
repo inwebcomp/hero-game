@@ -9,10 +9,9 @@ public class Equipment : Item {
 	
 	public EquipmentSlotType equipSlot;	// Slot to store equipment in
 
-	public float armorModifier;		// Increase/decrease in armor
-	public float damageModifier;      // Increase/decrease in damage
-
 	public Sprite sprite;
+
+	public List<StatModifier> modifiers = new List<StatModifier>();
 
 	// When pressed in inventory
 	public override void Use()
@@ -21,7 +20,6 @@ public class Equipment : Item {
 		EquipmentManager.instance.Equip(this);	// Equip it
 		RemoveFromInventory();					// Remove it from inventory
 	}
-
 }
 
 public enum EquipmentSlotType { Head, Chest, Legs, Weapon, Shield, Feet }
